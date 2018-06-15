@@ -23,13 +23,13 @@
   - { src: 'template/agent.j2', dest: '{{ path }}/agent.env' }
   
 - name: run zabbix-agent
-    docker_container:
-      name: zabbix-agent
-      image: docker.io/zabbix/zabbix-agent:ubuntu-3.4.4
-      restart: always
-      env:
-        PHP_TZ: {{ PHP_TZ }}
-        ZBX_SERVER_HOST: {{ ZBX_SERVER_HOST }}
-      network_mode: host
-      volumes:
-       - /:/hostdisk
+  docker_container:
+    name: zabbix-agent
+    image: docker.io/zabbix/zabbix-agent:ubuntu-3.4.4
+    restart: always
+    env:
+      PHP_TZ: {{ PHP_TZ }}
+      ZBX_SERVER_HOST: {{ ZBX_SERVER_HOST }}
+    network_mode: host
+    volumes:
+    - /:/hostdisk

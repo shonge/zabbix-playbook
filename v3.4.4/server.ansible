@@ -24,39 +24,39 @@
   - { src: 'template/mysql.j2', dest: '{{ path }}/mysql.env' }
 
 - name: run zabbix-web
-    docker_container:
-      name: zabbix-web
-      image: docker.io/zabbix/zabbix-web-nginx-mysql:ubuntu-3.4.4
-      restart: always
-      env:
-        PHP_TZ: {{ PHP_TZ }}
-        DB_SERVER_HOST: {{ DB_SERVER_HOST }}
-        MYSQL_USER: {{ MYSQL_USER }}
-        MYSQL_PASSWORD: {{ MYSQL_PASSWORD }}
-        ZBX_SERVER_HOST: {{ ZBX_SERVER_HOST }}
-      network_mode: host
+  docker_container:
+    name: zabbix-web
+    image: docker.io/zabbix/zabbix-web-nginx-mysql:ubuntu-3.4.4
+    restart: always
+    env:
+      PHP_TZ: {{ PHP_TZ }}
+      DB_SERVER_HOST: {{ DB_SERVER_HOST }}
+      MYSQL_USER: {{ MYSQL_USER }}
+      MYSQL_PASSWORD: {{ MYSQL_PASSWORD }}
+      ZBX_SERVER_HOST: {{ ZBX_SERVER_HOST }}
+    network_mode: host
 
 - name: run zabbix-server
-    docker_container:
-      name: zabbix-server
-      image: docker.io/zabbix/zabbix-server-mysql:ubuntu-3.4.4
-      restart: always
-      env:
-        PHP_TZ: {{ PHP_TZ }}
-        DB_SERVER_HOST: {{ DB_SERVER_HOST }}
-        MYSQL_USER: {{ MYSQL_USER }}
-        MYSQL_PASSWORD: {{ MYSQL_PASSWORD }}
-        ZBX_SERVER_HOST: {{ ZBX_SERVER_HOST }}
-      network_mode: host
-      
+  docker_container:
+    name: zabbix-server
+    image: docker.io/zabbix/zabbix-server-mysql:ubuntu-3.4.4
+    restart: always
+    env:
+      PHP_TZ: {{ PHP_TZ }}
+      DB_SERVER_HOST: {{ DB_SERVER_HOST }}
+      MYSQL_USER: {{ MYSQL_USER }}
+      MYSQL_PASSWORD: {{ MYSQL_PASSWORD }}
+      ZBX_SERVER_HOST: {{ ZBX_SERVER_HOST }}
+    network_mode: host
+    
 - name: run zabbix-mysql
-    docker_container:
-      name: zabbix-mysql
-      image: docker.io/mysql:5.6
-      restart: always
-      env:
-        PHP_TZ: {{ PHP_TZ }}
-        MYSQL_ROOT_PASSWORD: {{ MYSQL_PASSWORD }}
-      network_mode: host
-      volumes:
-       - /data/zabbix/mysql:/var/lib/mysql
+  docker_container:
+    name: zabbix-mysql
+    image: docker.io/mysql:5.6
+    restart: always
+    env:
+      PHP_TZ: {{ PHP_TZ }}
+      MYSQL_ROOT_PASSWORD: {{ MYSQL_PASSWORD }}
+    network_mode: host
+    volumes:
+    - /data/zabbix/mysql:/var/lib/mysql
