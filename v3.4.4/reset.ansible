@@ -1,0 +1,10 @@
+- name: clean zabbix
+  hosts: all
+  user: root
+  tasks:
+  - name: clean zabbix directory
+    file:
+      path: '{{ item }}'
+      state: absent
+    with_items:
+    - /var/tmp/wise2c/zabbix
