@@ -1,19 +1,21 @@
 - name: Deploy Zabbix
+  hosts: all
+  user: root
   vars:
     path: /var/tmp/wise2c/zabbix
-	zabbixserver: 172.18.0.141
+    zabbixserver: 172.18.0.141
   tasks:
-  - name: make k8s master dir
+  - name: make zabbix dir
     file:
       path: '{{ item }}'
       state: directory
       mode: 0755
     with_items:
     - '{{ path }}'
-  - name: setup server
+  - name: deploy server
     include_tasks: server.ansible
     when: role == 'server'
 
-  - name: setup server
+  - name: deploy agent
     include_tasks: agent.ansible
     when: role == 'agent'

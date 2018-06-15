@@ -1,4 +1,4 @@
-- name: copy zabbix images
+- name: copy zabbix server images
   copy:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
