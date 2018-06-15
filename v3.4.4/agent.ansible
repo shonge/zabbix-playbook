@@ -26,7 +26,7 @@
   docker_container:
     name: zabbix-agent
     image: docker.io/zabbix/zabbix-agent:ubuntu-3.4.4
-    restart: always
+    restart_policy: always
     env:
       PHP_TZ: '{{ PHP_TZ }}'
       ZBX_SERVER_HOST: '{{ ZBX_SERVER_HOST }}'

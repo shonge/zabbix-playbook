@@ -27,7 +27,7 @@
   docker_container:
     name: zabbix-web
     image: docker.io/zabbix/zabbix-web-nginx-mysql:ubuntu-3.4.4
-    restart: always
+    restart_policy: always
     env:
       PHP_TZ: '{{ PHP_TZ }}'
       DB_SERVER_HOST: '{{ DB_SERVER_HOST }}'
@@ -40,7 +40,7 @@
   docker_container:
     name: zabbix-server
     image: docker.io/zabbix/zabbix-server-mysql:ubuntu-3.4.4
-    restart: always
+    restart_policy: always
     env:
       PHP_TZ: '{{ PHP_TZ }}'
       DB_SERVER_HOST: '{{ DB_SERVER_HOST }}'
@@ -53,7 +53,7 @@
   docker_container:
     name: zabbix-mysql
     image: docker.io/mysql:5.6
-    restart: always
+    restart_policy: always
     env:
       PHP_TZ: '{{ PHP_TZ }}'
       MYSQL_ROOT_PASSWORD: '{{ MYSQL_PASSWORD }}'
