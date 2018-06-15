@@ -1,0 +1,23 @@
+- name: copy zabbix agent images
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+  - { src: 'file/zabbix_agent_imgs.tar', dest: '{{ path }}' }
+  run_once: true
+
+- name: load zabbix agent images
+  docker_image:
+    load_path: '{{ path }}/{{ item }}'
+    name: zabbix-agent
+    timeout: 600
+  with_items:
+  - zabbix_agent_imgs.tar
+  run_once: true
+  
+- name: generate zabbix agent env
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+  - { src: 'template/agent.j2', dest: '{{ path }}/agent.env' }

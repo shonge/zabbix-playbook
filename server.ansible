@@ -1,0 +1,25 @@
+- name: copy zabbix images
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+  - { src: 'file/zabbix_server_imgs.tar', dest: '{{ path }}' }
+  run_once: true
+
+- name: load zabbix server images
+  docker_image:
+    load_path: '{{ path }}/{{ item }}'
+    name: zabbix
+    timeout: 600
+  with_items:
+  - zabbix_server_imgs.tar
+  run_once: true
+  
+- name: generate zabbix server env
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+  - { src: 'template/server.j2', dest: '{{ path }}/server.env' }
+  - { src: 'template/mysql.j2', dest: '{{ path }}/mysql.env' }
+
