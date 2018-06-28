@@ -4,7 +4,6 @@
     dest: '{{ item.dest }}'
   with_items:
   - { src: 'file/zabbix_agent_imgs.tar', dest: '{{ path }}' }
-  run_once: true
 
 - name: load zabbix agent images
   docker_image:
@@ -13,7 +12,6 @@
     timeout: 600
   with_items:
   - zabbix_agent_imgs.tar
-  run_once: true
   
 - name: generate zabbix agent env
   template:
@@ -32,4 +30,4 @@
       ZBX_SERVER_HOST: '{{ ZBX_SERVER_HOST }}'
     network_mode: host
     volumes:
-    - /:/hostdisk
+    - /:/hostdisk:ro
